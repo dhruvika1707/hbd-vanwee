@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>vanwee archives</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Playfair+Display:wght@400;600&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="cursor-glow"></div>
+
+<!-- LOADING SCREEN -->
+
+<section id="loading-screen">
+  <div class="loading-content">
+    <p class="typing">loading vanwee archives...</p>
+    <p class="subtyping">this may contain excessive emotional attachment</p>
+
+    <button id="enter-btn">ENTER THE CHAOS</button>
+  </div>
+
+  <div class="cat">🐈‍⬛</div>
+</section>
+
+<!-- MAIN WEBSITE -->
+
+<div id="main-site" class="hidden">
+
+  <div class="stars"></div>
+  <div class="gold-thread"></div>
+
+  <!-- HERO -->
+
+  <section class="hero">
+    <h1>Happy Birthday Vanwee</h1>
+
+    <p class="subtitle">
+      all along there was some invisible string...
+    </p>
+
+    <div class="buttons">
+      <button onclick="scrollToSection('memories')">our memories</button>
+      <button onclick="openPopup()">reasons i love you</button>
+      <button onclick="openFiles()">do not click</button>
+      <button onclick="scrollToSection('final-message')">birthday message</button>
+    </div>
+  </section>
+
+  <!-- SCRAPBOOK -->
+
+  <section id="memories">
+
+    <h2>proof we existed</h2>
+
+    <div class="scrapbook">
+
+      <!-- PHOTO 1 -->
+      <div class="polaroid draggable" style="top:40px; left:10%;">
+        <img src="assets/photos/photo1.jpg">
+        <p>turt on top</p>
+      </div>
+
+      <!-- PHOTO 2 -->
+      <div class="polaroid draggable" style="top:300px; left:35%;">
+        <img src="assets/photos/photo2.jpg">
+        <p>highly suspicious behavior</p>
+      </div>
+
+      <!-- PHOTO 3 -->
+      <div class="polaroid draggable" style="top:150px; left:65%;">
+        <img src="assets/photos/photo3.jpg">
+        <p>chronically online final boss</p>
+      </div>
+
+      <!-- ADD MORE -->
+      
+    </div>
+
+  </section>
+
+  <!-- SECRET FILE -->
+
+  <div id="secret-files" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closeFiles()">×</span>
+
+      <h2>classified documents</h2>
+
+      <ul>
+        <li>dramatic incidents recorded: 472</li>
+        <li>cat mentions per conversation: concerning</li>
+        <li>shared braincells: unstable</li>
+        <li>friendship speed: alarmingly fast</li>
+        <li>emotional attachment levels: unsafe</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- REASONS POPUP -->
+
+  <div id="reason-popup" class="popup hidden">
+    <div class="popup-content small">
+
+      <span class="close" onclick="closePopup()">×</span>
+
+      <p id="random-message"></p>
+
+    </div>
+  </div>
+
+  <!-- FINAL MESSAGE -->
+
+  <section id="final-message">
+
+    <div class="letter">
+
+      <h2>happy birthday</h2>
+
+      <p>
+        thank you for becoming one of the best parts of my year.
+      </p>
+
+      <p>
+        somehow we found each other and became important ridiculously fast.
+      </p>
+
+      <p>
+        life feels louder, funnier, and better with you in it.
+      </p>
+
+      <p>
+        i hope this year gives you everything good.
+      </p>
+
+      <p class="signature">
+        — your clingy friend
+      </p>
+
+    </div>
+
+    <div class="birthday-cat">
+      🎂🐈
+    </div>
+
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
