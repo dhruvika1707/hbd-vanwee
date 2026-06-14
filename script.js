@@ -127,7 +127,7 @@ if (passwordBtn) {
         const msg =
             document.getElementById("passwordMessage");
 
-        if (input === "vanweeturns19") {
+        if (input === "pinksauce509") {
 
             msg.textContent = "ok enter";
 
@@ -292,31 +292,155 @@ if (puzzleBtn) {
 
 }
 
-/* -------------------------- */
-/* CROSSWORD PLACEHOLDER */
-/* -------------------------- */const crosswordCells =
-document.querySelectorAll(".cell");
+const CW_WORDS = [
+    { word: "PYTHON",         row: 0,  col: 0, dir: "across", num: 1 },
+    { word: "TAYLORSWIFT",    row: 0,  col: 2, dir: "down",   num: 2 },
+    { word: "AERIALTRAMLINE", row: 5,  col: 2, dir: "across", num: 3 },
+    { word: "PINK",           row: 7,  col: 0, dir: "down",   num: 4 },
+    { word: "VANWEE",         row: 8,  col: 0, dir: "across", num: 5 },
+    { word: "TURT",           row: 10, col: 2, dir: "across", num: 6 },
+    { word: "OREO",           row: 9,  col: 6, dir: "down",   num: 7 },
+];
 
-crosswordCells.forEach((cell,index)=>{
+const CW_ROWS = 13;
+const CW_COLS = 18;
 
-    cell.addEventListener(
-        "input",
-        ()=>{
+const cwAnswers = Array.from({ length: CW_ROWS }, () => Array(CW_COLS).fill(null));
+const cwActive  = Array.from({ length: CW_ROWS }, () => Array(CW_COLS).fill(false));
+const cwNumMap  = {};
 
-            cell.value =
-            cell.value.toUpperCase();
+CW_WORDS.forEach(({ word, row, col, dir, num }) => {
+    for (let i = 0; i < word.length; i++) {
+        const r = dir === "across" ? row     : row + i;
+        const c = dir === "across" ? col + i : col;
+        cwAnswers[r][c] = word[i];
+        cwActive[r][c]  = true;
+    }
+    cwNumMap[${row}-${col}] = num;
+});
 
-            if(
-                cell.value &&
-                crosswordCells[index+1]
-            ){
-                crosswordCells[index+1].focus();
+const cwBoard  = document.getElementById("crossword-board");
+const cwInputs = {};
+
+if (cwBoard) {
+    cwBoard.style.gridTemplateColumns = repeat(${CW_COLS}, 38px);
+    cwBoard.style.gridTemplateRows    = repeat(${CW_ROWS}, 38px);
+
+    for (let r = 0; r < CW_ROWS; r++) {
+        for (let c = 0; c < CW_COLS; c++) {
+
+            const wrap = document.createElement("div");
+            wrap.className = "cw-cell-wrap";
+
+            if (cwActive[r][c]) {
+
+                if (cwNumMap[${r}-${c}]) {
+                    const span = document.createElement("span");
+                    span.className   = "cw-num";
+                    span.textContent = cwNumMap[${r}-${c}];
+                    wrap.appendChild(span);
+                }
+
+                const inp = document.createElement("input");
+                inp.className       = "cw-cell";
+                inp.type            = "text";
+                inp.maxLength       = 1;
+                inp.dataset.r       = r;
+                inp.dataset.c       = c;
+                inp.autocomplete    = "off";
+                inp.autocorrect     = "off";
+                inp.autocapitalize  = "characters";
+                inp.spellcheck      = false;
+
+                inp.addEventListener("input", () => {
+                    inp.value = inp.value.toUpperCase().slice(-1);
+                    cwMoveFocus(r, c);
+                });
+
+                inp.addEventListener("keydown", (e) => {
+                    if (e.key === "Backspace" && !inp.value) cwMoveBack(r, c);
+                    if (e.key === "ArrowRight") cwFocusCell(r, c + 1);
+                    if (e.key === "ArrowLeft")  cwFocusCell(r, c - 1);
+                    if (e.key === "ArrowDown")  cwFocusCell(r + 1, c);
+                    if (e.key === "ArrowUp")    cwFocusCell(r - 1, c);
+                });
+
+                wrap.appendChild(inp);
+                cwInputs[${r}-${c}] = inp;
+
+            } else {
+                const blk = document.createElement("div");
+                blk.className = "cw-cell black";
+                wrap.appendChild(blk);
             }
 
+            cwBoard.appendChild(wrap);
         }
-    );
+    }
+}
 
-});
+function cwFocusCell(r, c) {
+    const inp = cwInputs[${r}-${c}];
+    if (inp) inp.focus();
+}
+
+function cwMoveFocus(r, c) {
+    cwFocusCell(r, c + 1) || cwFocusCell(r + 1, c);
+}
+
+function cwMoveBack(r, c) {
+    const prev = cwInputs[${r}-${c - 1}] || cwInputs[${r - 1}-${c}];
+    if (prev) { prev.value = ""; prev.focus(); }
+}
+
+const checkCwBtn = document.getElementById("checkCrosswordBtn");
+const cwMessage  = document.getElementById("crosswordMessage");
+const cwNextBtn  = document.getElementById("crosswordNextBtn");
+
+if (checkCwBtn) {
+    checkCwBtn.addEventListener("click", () => {
+
+        let allCorrect = true;
+        let anyFilled  = false;
+
+        for (let r = 0; r < CW_ROWS; r++) {
+            for (let c = 0; c < CW_COLS; c++) {
+                const inp = cwInputs[${r}-${c}];
+                if (!inp) continue;
+
+                inp.classList.remove("correct", "wrong");
+
+                if (inp.value) anyFilled = true;
+
+                if (inp.value === cwAnswers[r][c]) {
+                    inp.classList.add("correct");
+                } else {
+                    inp.classList.add("wrong");
+                    allCorrect = false;
+                }
+            }
+        }
+
+        if (!anyFilled) {
+            cwMessage.textContent = "fill something in first yaar 😭";
+            return;
+        }
+
+        if (allCorrect) {
+            cwMessage.textContent = "YESSS you got it!! 🎉";
+            launchConfetti();
+            if (cwNextBtn) cwNextBtn.classList.remove("hidden");
+        } else {
+            cwMessage.textContent = "some are wrong, try again bestie!";
+        }
+    });
+}
+
+if (cwNextBtn) {
+    cwNextBtn.addEventListener("click", () => {
+        showPage("scrapbook-page");
+    });
+}
 
 
 /* -------------------------- */
