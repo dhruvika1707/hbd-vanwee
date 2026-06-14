@@ -109,33 +109,49 @@
 
     </section>
 
-    <!-- CROSSWORD PLACEHOLDER --><div class="crossword-board">
+   <section id="crossword-page" class="page hidden">
 
-  <!-- PYTHON -->
-  <input class="cell" style="grid-row:1;grid-column:1" data-answer="P">
-  <input class="cell" style="grid-row:1;grid-column:2" data-answer="Y">
-  <input class="cell" style="grid-row:1;grid-column:3" data-answer="T">
-  <input class="cell" style="grid-row:1;grid-column:4" data-answer="H">
-  <input class="cell" style="grid-row:1;grid-column:5" data-answer="O">
-  <input class="cell" style="grid-row:1;grid-column:6" data-answer="N">
+    <h1>Crossword Time 🧩</h1>
+    <p>solve it or we're no longer friends hehehe</p>
 
-  <!-- PINK -->
-  <input class="cell" style="grid-row:2;grid-column:1" data-answer="I">
-  <input class="cell" style="grid-row:3;grid-column:1" data-answer="N">
-  <input class="cell" style="grid-row:4;grid-column:1" data-answer="K">
+    <div class="crossword-section">
 
-  <!-- TAYLORSWIFT -->
-  <input class="cell" style="grid-row:2;grid-column:3" data-answer="A">
-  <input class="cell" style="grid-row:3;grid-column:3" data-answer="Y">
-  <input class="cell" style="grid-row:4;grid-column:3" data-answer="L">
-  <input class="cell" style="grid-row:5;grid-column:3" data-answer="O">
-  <input class="cell" style="grid-row:6;grid-column:3" data-answer="R">
+        <div class="crossword-wrapper">
 
-  <!-- AERIALTRAMLINE -->
-  <input class="cell" style="grid-row:6;grid-column:4" data-answer="E">
-  <input class="cell" style="grid-row:6;grid-column:5" data-answer="R">
-  <input class="cell" style="grid-row:6;grid-column:6" data-answer="I">
-  ...
+            <div id="crossword-board"></div>
+
+            <div class="clues-panel">
+
+                <div class="clues-box">
+                    <h2>Across</h2>
+                    <ol>
+                        <li><span class="clue-num">1.</span> Where you and Dhruvika bonded the most</li>
+                        <li><span class="clue-num">3.</span> Least used emoji 😉</li>
+                        <li><span class="clue-num">5.</span> Our nickname for u</li>
+                        <li><span class="clue-num">6.</span> Favourite 4 lettered word</li>
+                    </ol>
+                </div>
+
+                <div class="clues-box">
+                    <h2>Down</h2>
+                    <ol>
+                        <li><span class="clue-num">2.</span> You and I walk a fragile line, I have known it all this time</li>
+                        <li><span class="clue-num">4.</span> —— sauce pasta is the origin of turt</li>
+                        <li><span class="clue-num">7.</span> Ananya and mine fav cat</li>
+                    </ol>
+                </div>
+
+            </div>
+
+        </div>
+
+        <button id="checkCrosswordBtn">Check Answers</button>
+        <p id="crosswordMessage"></p>
+        <button id="crosswordNextBtn" class="next-btn hidden">Continue</button>
+
+    </div>
+
+</section>
 
 
     <!-- SCRAPBOOK -->
