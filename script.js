@@ -296,7 +296,80 @@ if (puzzleBtn) {
 /* CROSSWORD PLACEHOLDER */
 /* -------------------------- */
 
-const crosswordNext =
+const crosswordAnswers = [
+    "ANSWER1",
+    "ANSWER2",
+    "ANSWER3",
+    "ANSWER4",
+    "ANSWER5",
+    "ANSWER6",
+    "ANSWER7",
+    "ANSWER8",
+    "ANSWER9",
+    "ANSWER10",
+    "ANSWER11",
+    "ANSWER12"
+];
+
+const checkCrosswordBtn =
+document.getElementById("checkCrosswordBtn");
+
+if(checkCrosswordBtn){
+
+    checkCrosswordBtn.addEventListener(
+        "click",
+        () => {
+
+            const inputs =
+            document.querySelectorAll(
+                ".answers-box input"
+            );
+
+            let correct = true;
+
+            inputs.forEach((input,index)=>{
+
+                if(
+                    input.value
+                    .trim()
+                    .toUpperCase() !==
+                    crosswordAnswers[index]
+                ){
+                    correct = false;
+                }
+
+            });
+
+            const msg =
+            document.getElementById(
+                "crosswordMessage"
+            );
+
+            if(correct){
+
+                msg.textContent =
+                "yasss correct";
+
+                document
+                .getElementById(
+                    "crosswordNext"
+                )
+                .classList
+                .remove("hidden");
+
+                launchConfetti();
+
+            }else{
+
+                msg.textContent =
+                "something is wrong 👀";
+
+            }
+
+        }
+    );
+
+}const crosswordNext =
     document.getElementById(
         "crosswordNext"
     );
