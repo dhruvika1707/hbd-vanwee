@@ -294,98 +294,30 @@ if (puzzleBtn) {
 
 /* -------------------------- */
 /* CROSSWORD PLACEHOLDER */
-/* -------------------------- */
+/* -------------------------- */const crosswordCells =
+document.querySelectorAll(".cell");
 
-const crosswordAnswers = [
-    "ANSWER1",
-    "ANSWER2",
-    "ANSWER3",
-    "ANSWER4",
-    "ANSWER5",
-    "ANSWER6",
-    "ANSWER7",
-    "ANSWER8",
-    "ANSWER9",
-    "ANSWER10",
-    "ANSWER11",
-    "ANSWER12"
-];
+crosswordCells.forEach((cell,index)=>{
 
-const checkCrosswordBtn =
-document.getElementById("checkCrosswordBtn");
+    cell.addEventListener(
+        "input",
+        ()=>{
 
-if(checkCrosswordBtn){
+            cell.value =
+            cell.value.toUpperCase();
 
-    checkCrosswordBtn.addEventListener(
-        "click",
-        () => {
-
-            const inputs =
-            document.querySelectorAll(
-                ".answers-box input"
-            );
-
-            let correct = true;
-
-            inputs.forEach((input,index)=>{
-
-                if(
-                    input.value
-                    .trim()
-                    .toUpperCase() !==
-                    crosswordAnswers[index]
-                ){
-                    correct = false;
-                }
-
-            });
-
-            const msg =
-            document.getElementById(
-                "crosswordMessage"
-            );
-
-            if(correct){
-
-                msg.textContent =
-                "yasss correct";
-
-                document
-                .getElementById(
-                    "crosswordNext"
-                )
-                .classList
-                .remove("hidden");
-
-                launchConfetti();
-
-            }else{
-
-                msg.textContent =
-                "something is wrong 👀";
-
+            if(
+                cell.value &&
+                crosswordCells[index+1]
+            ){
+                crosswordCells[index+1].focus();
             }
 
         }
     );
 
-}const crosswordNext =
-    document.getElementById(
-        "crosswordNext"
-    );
+});
 
-if (crosswordNext) {
-
-    crosswordNext.addEventListener(
-        "click",
-        () => {
-
-            showPage("scrapbook-page");
-
-        }
-    );
-
-}
 
 /* -------------------------- */
 /* SCRAPBOOK */
